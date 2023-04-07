@@ -1,4 +1,10 @@
+using FilmesApi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var connectionString = builder.Configuration.GetConnectionString("FilmeConnection");
+builder.Services.AddDbContext<FilmeContext>(opts=> opts.UseMySql( connectionString, serverVersion: ServerVersion.AutoDetect(connectionString)));
 
 // Add services to the container.
 
